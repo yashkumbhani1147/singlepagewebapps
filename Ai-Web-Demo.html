@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> AI Insights & Creative Intelligence Web Template</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        dark: {
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a25',
+                            600: '#252535',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.3)' },
+                            '100%': { boxShadow: '0 0 40px rgba(14, 165, 233, 0.6)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #0ea5e9 50%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: rgba(26, 26, 37, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glow-border {
+            position: relative;
+        }
+
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(135deg, #0ea5e9, #6366f1, #0ea5e9);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .glow-border:hover::before {
+            opacity: 1;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-pattern {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .logo-spiral {
+            filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.05);
+        }
+
+        .nav-blur {
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+    <base target="_blank">
+</head>
+
+<body class="font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative w-10 h-10">
+                        <svg viewBox="0 0 100 100"
+                            class="w-full h-full logo-spiral transition-transform duration-500 group-hover:rotate-180">
+                            <path d="M 50 10 A 40 40 0 1 0 50 90 A 30 30 0 1 1 50 30 A 20 20 0 1 0 50 70 L 65 85"
+                                fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"
+                                class="text-white" />
+                        </svg>
+                    </div>
+                    <span class="font-display font-bold text-xl tracking-tight text-white">
+                        Crazy<span class="text-brand-500">Creaters</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#articles"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Articles</a>
+                    <a href="#topics"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Topics</a>
+                    <a href="#newsletter"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">Newsletter</a>
+                    <a href="#about"
+                        class="text-sm font-medium text-gray-300 hover:text-white transition-colors">About</a>
+                </div>
+
+                <!-- CTA -->
+                <div class="flex items-center gap-4">
+                    <button
+                        class="hidden md:block text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Sign In
+                    </button>
+                    <button
+                        class="px-5 py-2.5 bg-white text-dark-900 rounded-full text-sm font-semibold hover:bg-brand-50 transition-all duration-300 hover:scale-105">
+                        Subscribe
+                    </button>
+                    <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-dark-900/95 backdrop-blur-xl">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#articles" class="block py-2 text-gray-300 hover:text-white">Articles</a>
+                <a href="#topics" class="block py-2 text-gray-300 hover:text-white">Topics</a>
+                <a href="#newsletter" class="block py-2 text-gray-300 hover:text-white">Newsletter</a>
+                <a href="#about" class="block py-2 text-gray-300 hover:text-white">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden grid-pattern">
+        <div class="hero-glow animate-pulse-slow"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-float">
+                <span class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span>
+                <span class="text-sm font-medium text-gray-300">Exploring the Future of AI</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-tight mb-6">
+                <span class="block text-white">Decode</span>
+                <span class="block gradient-text">Intelligence</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-lg md:text-xl text-gray-400 mb-10 leading-relaxed">
+                Deep dives into artificial intelligence, machine learning breakthroughs, and the creative revolution
+                powered by algorithms.
+            </p>
+
+            <!-- Search Bar -->
+            <div class="max-w-xl mx-auto relative mb-12">
+                <input type="text" placeholder="Search articles, topics, or trends..."
+                    class="w-full px-6 py-4 bg-dark-800 border border-white/10 rounded-2xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-500/50 focus:ring-2 focus:ring-brand-500/20 transition-all">
+                <button class="absolute right-2 top-2 p-2 bg-brand-600 rounded-xl hover:bg-brand-500 transition-colors">
+                    <i data-lucide="search" class="w-5 h-5 text-white"></i>
+                </button>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16 text-sm text-gray-500">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="file-text" class="w-4 h-4 text-brand-500"></i>
+                    <span>200+ Articles</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="users" class="w-4 h-4 text-brand-500"></i>
+                    <span>50K+ Readers</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="zap" class="w-4 h-4 text-brand-500"></i>
+                    <span>Weekly Updates</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-6 h-6 text-gray-600"></i>
+        </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="glass-card rounded-3xl overflow-hidden glow-border group cursor-pointer">
+                <div class="grid lg:grid-cols-2 gap-0">
+                    <div class="relative h-64 lg:h-auto overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop"
+                            alt="AI Neural Network"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent lg:bg-gradient-to-r">
+                        </div>
+                    </div>
+                    <div class="p-8 lg:p-12 flex flex-col justify-center">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span
+                                class="px-3 py-1 bg-brand-500/20 text-brand-400 text-xs font-semibold rounded-full">Featured</span>
+                            <span class="text-gray-500 text-sm">12 min read</span>
+                        </div>
+                        <h2
+                            class="font-display text-3xl lg:text-4xl font-bold text-white mb-4 group-hover:text-brand-400 transition-colors">
+                            The Dawn of Multimodal AI: Beyond Text and Vision
+                        </h2>
+                        <p class="text-gray-400 mb-6 leading-relaxed">
+                            Exploring how next-generation AI systems are integrating multiple modalities to create more
+                            human-like understanding and interaction capabilities.
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop"
+                                    class="w-10 h-10 rounded-full border-2 border-dark-700" alt="Author">
+                                <div>
+                                    <p class="text-sm font-medium text-white">Alex Chen</p>
+                                    <p class="text-xs text-gray-500">Feb 18, 2026</p>
+                                </div>
+                            </div>
+                            <button
+                                class="flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors font-medium">
+                                Read Article <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles Grid -->
+    <section id="articles" class="py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-12">
+                <div>
+                    <h3 class="font-display text-3xl font-bold text-white mb-2">Latest Insights</h3>
+                    <p class="text-gray-400">Fresh perspectives on AI development</p>
+                </div>
+                <a href="#"
+                    class="hidden md:flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
+                    View All <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Article Card 1 -->
+                <article
+                    class="article-card glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-brand-500/30 transition-all duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=600&fit=crop"
+                            alt="AI Robot"
+                            class="article-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="px-3 py-1 bg-dark-900/80 backdrop-blur text-xs font-medium text-white rounded-full border border-white/10">Machine
+                                Learning</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4
+                            class="font-display text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors line-clamp-2">
+                            Understanding Transformer Architectures in 2026
+                        </h4>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                            A comprehensive breakdown of how modern transformer models are evolving beyond attention
+                            mechanisms.
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <span>8 min read</span>
+                            <span>Feb 16, 2026</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Card 2 -->
+                <article
+                    class="article-card glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-brand-500/30 transition-all duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&h=600&fit=crop"
+                            alt="Code"
+                            class="article-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="px-3 py-1 bg-dark-900/80 backdrop-blur text-xs font-medium text-white rounded-full border border-white/10">Development</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4
+                            class="font-display text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors line-clamp-2">
+                            Building AI Agents: From Concept to Deployment
+                        </h4>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                            Practical guide to creating autonomous AI agents that can perform complex multi-step tasks.
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <span>15 min read</span>
+                            <span>Feb 14, 2026</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article Card 3 -->
+                <article
+                    class="article-card glass-card rounded-2xl overflow-hidden group cursor-pointer hover:border-brand-500/30 transition-all duration-300">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop"
+                            alt="Ethics"
+                            class="article-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute top-4 left-4">
+                            <span
+                                class="px-3 py-1 bg-dark-900/80 backdrop-blur text-xs font-medium text-white rounded-full border border-white/10">Ethics</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4
+                            class="font-display text-xl font-bold text-white mb-2 group-hover:text-brand-400 transition-colors line-clamp-2">
+                            The Ethics of Synthetic Media in Creative Industries
+                        </h4>
+                        <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                            Navigating the moral implications of AI-generated content and copyright in the modern era.
+                        </p>
+                        <div class="flex items-center justify-between text-xs text-gray-500">
+                            <span>10 min read</span>
+                            <span>Feb 12, 2026</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <div class="mt-8 text-center md:hidden">
+                <a href="#"
+                    class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 transition-colors">
+                    View All Articles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Topics Section -->
+    <section id="topics" class="py-20 relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-brand-950/20 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h3 class="font-display text-3xl font-bold text-white mb-4">Explore Topics</h3>
+                <p class="text-gray-400 max-w-2xl mx-auto">Deep dives into specialized areas of artificial intelligence
+                    and creative technology</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#"
+                    class="glass-card p-6 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 group text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 rounded-xl bg-brand-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="brain" class="w-6 h-6 text-brand-400"></i>
+                    </div>
+                    <h4 class="font-semibold text-white mb-1">Deep Learning</h4>
+                    <p class="text-xs text-gray-500">24 Articles</p>
+                </a>
+
+                <a href="#"
+                    class="glass-card p-6 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 group text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 rounded-xl bg-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="image" class="w-6 h-6 text-purple-400"></i>
+                    </div>
+                    <h4 class="font-semibold text-white mb-1">Generative AI</h4>
+                    <p class="text-xs text-gray-500">18 Articles</p>
+                </a>
+
+                <a href="#"
+                    class="glass-card p-6 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 group text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="cpu" class="w-6 h-6 text-emerald-400"></i>
+                    </div>
+                    <h4 class="font-semibold text-white mb-1">AI Hardware</h4>
+                    <p class="text-xs text-gray-500">12 Articles</p>
+                </a>
+
+                <a href="#"
+                    class="glass-card p-6 rounded-2xl hover:bg-dark-700/50 transition-all duration-300 group text-center">
+                    <div
+                        class="w-12 h-12 mx-auto mb-4 rounded-xl bg-amber-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i data-lucide="lightbulb" class="w-6 h-6 text-amber-400"></i>
+                    </div>
+                    <h4 class="font-semibold text-white mb-1">AI Strategy</h4>
+                    <p class="text-xs text-gray-500">15 Articles</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-20">
+        <div class="max-w-4xl mx-auto px-6 lg:px-8">
+            <div class="glass-card rounded-3xl p-8 md:p-12 text-center relative overflow-hidden">
+                <div
+                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent">
+                </div>
+
+                <div class="relative z-10">
+                    <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-brand-500/20 flex items-center justify-center">
+                        <i data-lucide="mail" class="w-8 h-8 text-brand-400"></i>
+                    </div>
+
+                    <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+                        Stay Ahead of the Curve
+                    </h3>
+                    <p class="text-gray-400 mb-8 max-w-lg mx-auto">
+                        Join 50,000+ creators and developers receiving weekly insights on AI advancements, tutorials,
+                        and industry analysis.
+                    </p>
+
+                    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+                        onsubmit="event.preventDefault(); showToast('Thanks for subscribing!');">
+                        <input type="email" placeholder="Enter your email" required
+                            class="flex-1 px-5 py-3 bg-dark-900 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 transition-colors">
+                        <button type="submit"
+                            class="px-6 py-3 bg-brand-600 hover:bg-brand-500 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2">
+                            Subscribe <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+
+                    <p class="text-xs text-gray-600 mt-4">No spam. Unsubscribe anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-dark-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2">
+                    <a href="#" class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8">
+                            <svg viewBox="0 0 100 100" class="w-full h-full text-white">
+                                <path d="M 50 10 A 40 40 0 1 0 50 90 A 30 30 0 1 1 50 30 A 20 20 0 1 0 50 70 L 65 85"
+                                    fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" />
+                            </svg>
+                        </div>
+                        <span class="font-display font-bold text-lg text-white">
+                            Crazy<span class="text-brand-500">Creaters</span>
+                        </span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-sm">
+                        Exploring the intersection of artificial intelligence and human creativity. Insights, analysis,
+                        and tutorials for the modern creator.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Content</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Latest Articles</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Tutorials</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition-colors">Newsletter</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Connect</h4>
+                    <div class="flex gap-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-600 transition-all">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-600 transition-all">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-lg bg-dark-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand-600 transition-all">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-600">&copy; 2026 CrazyCreaters. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-600">
+                    <a href="#" class="hover:text-gray-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-400 transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <div class="glass-card px-6 py-4 rounded-xl border-l-4 border-brand-500 flex items-center gap-3">
+            <i data-lucide="check-circle" class="w-5 h-5 text-brand-400"></i>
+            <span class="text-white font-medium" id="toast-message">Success!</span>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Navbar Scroll Effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('shadow-lg', 'shadow-black/20');
+            } else {
+                navbar.classList.remove('shadow-lg', 'shadow-black/20');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
