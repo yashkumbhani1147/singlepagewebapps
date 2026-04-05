@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dexton Crop Guard – Protecting Crops, Empowering Farmers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-primary: #2e7d32;
+    --green-mid: #43a047;
+    --green-light: #66bb6a;
+    --green-bright: #76c442;
+    --green-pale: #e8f5e9;
+    --lime: #a8d500;
+    --dark: #0d1f0e;
+    --dark-mid: #1a2f1b;
+    --text-main: #1b2e1c;
+    --text-muted: #5a7060;
+    --white: #ffffff;
+    --off-white: #f5faf5;
+    --gold: #c8a94a;
+    --border: rgba(102,187,106,0.2);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-main);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(13,31,14,0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(118,196,66,0.15);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 70px;
+    transition: all 0.3s ease;
+  }
+  nav.scrolled { background: rgba(13,31,14,0.98); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: white; font-size: 14px; letter-spacing: 0.5px;
+    box-shadow: 0 0 0 2px rgba(118,196,66,0.4);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .nav-logo-text { color: white; font-family: 'Space Grotesk', sans-serif; }
+  .nav-logo-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--green-light); letter-spacing: 1.5px; }
+  .nav-logo-text span { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    font-size: 13.5px; font-weight: 500; letter-spacing: 0.5px;
+    transition: color 0.2s; position: relative; padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px;
+    background: var(--green-bright); transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--green-light); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    background: linear-gradient(135deg, var(--green-bright), var(--green-mid));
+    color: white; border: none; padding: 10px 22px; border-radius: 6px;
+    font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px;
+    transition: all 0.3s; text-decoration: none; font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 4px 15px rgba(118,196,66,0.3);
+  }
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(118,196,66,0.45); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 100px 5% 60px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(46,125,50,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(118,196,66,0.12) 0%, transparent 50%),
+      linear-gradient(160deg, #0d1f0e 0%, #0a1a0b 50%, #051005 100%);
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(118,196,66,1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(118,196,66,1) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(118,196,66,0.15), transparent 70%);
+    animation: float 8s infinite ease-in-out;
+  }
+  .orb-1 { width: 400px; height: 400px; top: -100px; right: 10%; animation-delay: 0s; }
+  .orb-2 { width: 250px; height: 250px; bottom: 10%; right: 30%; animation-delay: -3s; }
+  .orb-3 { width: 180px; height: 180px; top: 40%; left: 5%; animation-delay: -5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-30px) scale(1.05); }
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(118,196,66,0.12); border: 1px solid rgba(118,196,66,0.3);
+    padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+    color: var(--green-bright); font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  .hero-badge-dot { width: 6px; height: 6px; background: var(--green-bright); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 6vw, 78px);
+    font-weight: 900;
+    line-height: 1.05;
+    color: white;
+    margin-bottom: 24px;
+    animation: fadeInUp 0.8s ease 0.4s both;
+  }
+  .hero-title em { color: var(--green-bright); font-style: normal; }
+  .hero-title .line2 { color: rgba(255,255,255,0.5); font-size: 0.65em; display: block; margin-top: 6px; font-weight: 400; }
+
+  .hero-desc {
+    color: rgba(255,255,255,0.6); font-size: 16.5px; line-height: 1.75;
+    margin-bottom: 40px; animation: fadeInUp 0.8s ease 0.6s both;
+    max-width: 520px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.8s both; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--green-bright), var(--green-primary));
+    color: white; padding: 15px 32px; border-radius: 8px;
+    font-weight: 600; font-size: 15px; text-decoration: none;
+    box-shadow: 0 8px 30px rgba(118,196,66,0.35);
+    transition: all 0.3s; display: flex; align-items: center; gap: 10px;
+    border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(118,196,66,0.5); }
+
+  .btn-ghost {
+    background: transparent; color: rgba(255,255,255,0.8);
+    padding: 15px 32px; border-radius: 8px;
+    font-weight: 500; font-size: 15px; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s; display: flex; align-items: center; gap: 10px;
+  }
+  .btn-ghost:hover { border-color: var(--green-bright); color: var(--green-bright); background: rgba(118,196,66,0.05); }
+
+  .hero-stats {
+    position: absolute; right: 5%; bottom: 15%;
+    display: flex; flex-direction: column; gap: 16px;
+    z-index: 2; animation: fadeInUp 0.8s ease 1s both;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(118,196,66,0.2);
+    backdrop-filter: blur(12px); border-radius: 12px;
+    padding: 18px 24px; text-align: center;
+    min-width: 130px;
+  }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--green-bright); }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.5); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+  /* Leaf deco */
+  .leaf-deco {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 45%;
+    z-index: 1; pointer-events: none;
+  }
+  .leaf-svg { width: 100%; height: 100%; opacity: 0.12; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 5%; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--green-primary);
+    margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; width: 30px; height: 2px; background: var(--green-bright); }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 4vw, 52px); font-weight: 900;
+    color: var(--dark); line-height: 1.15; margin-bottom: 20px;
+  }
+  .section-title em { color: var(--green-primary); font-style: normal; }
+
+  .section-desc { color: var(--text-muted); font-size: 16px; line-height: 1.8; max-width: 560px; }
+
+  /* ── ABOUT ── */
+  #about {
+    background: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(160deg, var(--green-pale) 0%, rgba(118,196,66,0.15) 100%);
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; position: relative;
+    border: 1px solid var(--border);
+  }
+
+  .about-img-frame svg { width: 70%; height: 70%; opacity: 0.4; }
+
+  .about-badge-float {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--green-primary); color: white;
+    padding: 20px 24px; border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(46,125,50,0.4);
+    text-align: center;
+  }
+  .about-badge-float strong { display: block; font-size: 28px; font-family: 'Playfair Display', serif; }
+  .about-badge-float span { font-size: 11px; opacity: 0.8; letter-spacing: 1px; }
+
+  .about-card-float {
+    position: absolute; top: 30px; left: -30px;
+    background: white; border-radius: 12px;
+    padding: 16px 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--green-bright);
+    max-width: 180px;
+  }
+  .about-card-float p { font-size: 13px; font-weight: 600; color: var(--dark); }
+  .about-card-float span { font-size: 11px; color: var(--text-muted); }
+
+  .about-content {}
+
+  .about-features { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .feat-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 18px; border-radius: 12px;
+    background: var(--off-white); border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .feat-item:hover { border-color: var(--green-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(46,125,50,0.1); }
+  .feat-icon {
+    width: 40px; height: 40px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--green-bright), var(--green-primary));
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .feat-text strong { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 4px; }
+  .feat-text span { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── PRODUCTS ── */
+  #products { background: var(--off-white); }
+
+  .products-header { text-align: center; margin-bottom: 60px; }
+  .products-header .section-label { justify-content: center; }
+  .products-header .section-title { max-width: 600px; margin: 0 auto 16px; }
+  .products-header .section-desc { margin: 0 auto; text-align: center; }
+
+  .product-tabs {
+    display: flex; gap: 8px; justify-content: center; margin-bottom: 48px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 24px; border-radius: 100px; border: 1.5px solid var(--border);
+    background: white; color: var(--text-muted); font-size: 13.5px; font-weight: 500;
+    cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--green-primary); color: white;
+    border-color: var(--green-primary); box-shadow: 0 4px 15px rgba(46,125,50,0.25);
+  }
+
+  .products-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;
+  }
+
+  .product-card {
+    background: white; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); transition: all 0.35s;
+    position: relative;
+  }
+  .product-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(46,125,50,0.15); border-color: var(--green-light); }
+
+  .product-card-img {
+    height: 200px;
+    background: linear-gradient(145deg, var(--green-pale), rgba(118,196,66,0.1));
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .product-card-img .product-emoji { font-size: 64px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1)); }
+
+  .product-card-tag {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--green-primary); color: white;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    padding: 4px 10px; border-radius: 100px; text-transform: uppercase;
+  }
+
+  .product-card-body { padding: 20px; }
+  .product-card-body h3 { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
+  .product-card-body .formula { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
+  .product-card-body .sizes {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  .size-tag {
+    background: var(--green-pale); color: var(--green-primary);
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px;
+  }
+  .product-card-actions { display: flex; gap: 8px; }
+  .btn-inquiry {
+    flex: 1; background: var(--green-primary); color: white;
+    border: none; padding: 10px; border-radius: 8px; font-size: 13px;
+    font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-inquiry:hover { background: var(--green-mid); }
+  .btn-wa {
+    width: 40px; height: 40px; background: #25D366; color: white;
+    border: none; border-radius: 8px; display: flex; align-items: center;
+    justify-content: center; cursor: pointer; font-size: 18px; transition: all 0.3s; flex-shrink: 0;
+  }
+  .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
+
+  /* Products hidden by category */
+  .product-card[data-cat] { display: none; }
+  .product-card[data-cat].visible { display: block; }
+
+  /* ── WHY US ── */
+  #why {
+    background: var(--dark);
+    position: relative; overflow: hidden;
+  }
+  #why .why-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 80% 50%, rgba(46,125,50,0.2), transparent);
+  }
+  .why-inner { position: relative; z-index: 1; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .why-content .section-title { color: white; }
+  .why-content .section-desc { color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+
+  .why-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .why-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(118,196,66,0.15);
+    border-radius: 16px; padding: 24px; transition: all 0.3s;
+  }
+  .why-card:hover { background: rgba(118,196,66,0.08); border-color: rgba(118,196,66,0.35); transform: translateY(-3px); }
+  .why-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .why-card h4 { color: white; font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .why-card p { color: rgba(255,255,255,0.45); font-size: 13px; line-height: 1.65; }
+
+  /* Mission/Vision panels */
+  .mv-panels { display: flex; flex-direction: column; gap: 20px; }
+  .mv-panel {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(118,196,66,0.12);
+    border-radius: 16px; padding: 28px; position: relative; overflow: hidden;
+  }
+  .mv-panel::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+    background: linear-gradient(to bottom, var(--green-bright), var(--green-primary));
+  }
+  .mv-panel h3 { color: var(--green-bright); font-size: 12px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+  .mv-panel p { color: rgba(255,255,255,0.55); font-size: 14px; line-height: 1.8; }
+
+  /* ── CONTACT ── */
+  #contact { background: white; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+
+  .contact-info {}
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px;
+    padding: 20px; border-radius: 12px; background: var(--off-white); border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+  .contact-item:hover { border-color: var(--green-light); }
+  .contact-item-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--green-bright), var(--green-primary));
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .contact-item-text strong { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+  .contact-item-text a, .contact-item-text p { font-size: 15px; color: var(--dark); text-decoration: none; font-weight: 500; line-height: 1.6; }
+  .contact-item-text a:hover { color: var(--green-primary); }
+
+  .social-row { display: flex; gap: 12px; margin-top: 32px; }
+  .social-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 8px; text-decoration: none;
+    font-size: 13px; font-weight: 600; transition: all 0.3s; border: 1.5px solid transparent;
+  }
+  .social-btn.fb { background: #1877F2; color: white; }
+  .social-btn.ig { background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+  .social-btn.wa { background: #25D366; color: white; }
+  .social-btn:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* Form */
+  .contact-form { }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
+  .form-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 28px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12.5px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 13px 16px; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: 14.5px; color: var(--dark); background: var(--off-white);
+    font-family: 'DM Sans', sans-serif; transition: all 0.3s; outline: none;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--green-primary); background: white;
+    box-shadow: 0 0 0 4px rgba(46,125,50,0.08);
+  }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-submit {
+    width: 100%; padding: 15px; background: linear-gradient(135deg, var(--green-bright), var(--green-primary));
+    color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 8px 24px rgba(46,125,50,0.3); letter-spacing: 0.5px;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(46,125,50,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    padding: 60px 5% 0;
+    border-top: 1px solid rgba(118,196,66,0.12);
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 48px; margin-bottom: 48px; }
+
+  .footer-brand {}
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .footer-logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--green-bright), var(--green-primary));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: white; font-size: 13px; font-family: 'Space Grotesk', sans-serif;
+  }
+  .footer-logo-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--green-light); letter-spacing: 1px; font-family: 'Space Grotesk', sans-serif; }
+  .footer-logo-text span { font-size: 10px; letter-spacing: 3px; color: rgba(255,255,255,0.35); text-transform: uppercase; }
+  .footer-tagline { color: rgba(255,255,255,0.4); font-size: 13.5px; line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
+
+  .footer-heading { color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 20px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-light); }
+
+  .footer-products-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-products-list a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-products-list a:hover { color: var(--green-light); }
+
+  .footer-contact p { color: rgba(255,255,255,0.4); font-size: 13.5px; line-height: 2; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 0; display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { color: rgba(255,255,255,0.3); font-size: 12.5px; }
+  .footer-bottom a { color: var(--green-bright); text-decoration: none; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.revealed { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── MOBILE NAV ── */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 70px; left: 0; right: 0; z-index: 999;
+    background: rgba(13,31,14,0.97); backdrop-filter: blur(18px);
+    padding: 24px 5%; flex-direction: column; gap: 16px;
+    border-bottom: 1px solid rgba(118,196,66,0.15);
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 16px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+  /* ── PRODUCT MODAL ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: white; border-radius: 20px; max-width: 480px; width: 100%;
+    padding: 40px; position: relative; animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--off-white); border: 1px solid var(--border);
+    cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); transition: all 0.2s;
+  }
+  .modal-close:hover { background: var(--green-pale); color: var(--green-primary); }
+  .modal-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .modal-subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 24px; }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .about-visual { display: none; }
+    .why-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .hero-stats { display: none; }
+    .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+    .form-row { grid-template-columns: 1fr; }
+    .about-features { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    nav { padding: 0 4%; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .footer-grid { grid-template-columns: 1fr; }
+    section { padding: 70px 4%; }
+    #home { padding: 100px 4% 60px; }
+  }
+
+  /* Ticker strip */
+  .ticker-strip {
+    background: var(--green-primary); overflow: hidden;
+    white-space: nowrap; padding: 10px 0;
+  }
+  .ticker-inner {
+    display: inline-flex; gap: 60px;
+    animation: ticker 30s linear infinite;
+  }
+  .ticker-inner span { font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,0.85); letter-spacing: 1.5px; text-transform: uppercase; }
+  .ticker-inner .dot { color: var(--green-bright); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* Product search */
+  .product-search-wrap { display: flex; justify-content: center; margin-bottom: 24px; }
+  .product-search {
+    width: 100%; max-width: 400px; padding: 12px 20px;
+    border: 1.5px solid var(--border); border-radius: 100px;
+    font-size: 14px; font-family: 'DM Sans', sans-serif;
+    background: white; outline: none; transition: all 0.3s;
+    color: var(--dark);
+  }
+  .product-search:focus { border-color: var(--green-primary); box-shadow: 0 0 0 4px rgba(46,125,50,0.08); }
+
+  /* Count banner */
+  .count-strip {
+    background: var(--green-pale); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px 28px; display: flex;
+    align-items: center; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px;
+  }
+  .count-strip-stat { text-align: center; }
+  .count-strip-stat strong { display: block; font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--green-primary); }
+  .count-strip-stat span { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .count-sep { width: 1px; height: 40px; background: var(--border); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    <div class="nav-logo-icon">DCG</div>
+    <div class="nav-logo-text">
+      <strong>DEXTON</strong>
+      <span>Crop Guard</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+919428375031" class="nav-cta">📞 +91 94283 75031</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMobile()">Home</a>
+  <a href="#about" onclick="closeMobile()">About Us</a>
+  <a href="#products" onclick="closeMobile()">Products</a>
+  <a href="#why" onclick="closeMobile()">Why Us</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> Est. 2018 – Surat, Gujarat</div>
+    <h1 class="hero-title">
+      Protect Your <em>Crops.</em>
+      <span class="line2">Empower Your Harvest.</span>
+    </h1>
+    <p class="hero-desc">
+      India's trusted partner in advanced crop science — delivering insecticides, fungicides, herbicides, and plant growth regulators to millions of farmers nationwide.
+    </p>
+    <div class="hero-actions">
+      <a href="#products" class="btn-primary">🌿 Explore Products</a>
+      <a href="#contact" class="btn-ghost">Talk to an Expert →</a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-card reveal reveal-delay-1">
+      <div class="stat-num">2018</div>
+      <div class="stat-label">Founded</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Products</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-3">
+      <div class="stat-num">Pan</div>
+      <div class="stat-label">India Reach</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-strip">
+  <div class="ticker-inner">
+    <span>🌾 Insecticides</span><span class="dot">✦</span>
+    <span>🍃 Fungicides</span><span class="dot">✦</span>
+    <span>🌱 Herbicides</span><span class="dot">✦</span>
+    <span>🧬 Plant Growth Regulators</span><span class="dot">✦</span>
+    <span>🛡️ Crop Protection</span><span class="dot">✦</span>
+    <span>🌍 Pan-India Supply Chain</span><span class="dot">✦</span>
+    <span>♻️ Sustainable Agriculture</span><span class="dot">✦</span>
+    <span>🌾 Insecticides</span><span class="dot">✦</span>
+    <span>🍃 Fungicides</span><span class="dot">✦</span>
+    <span>🌱 Herbicides</span><span class="dot">✦</span>
+    <span>🧬 Plant Growth Regulators</span><span class="dot">✦</span>
+    <span>🛡️ Crop Protection</span><span class="dot">✦</span>
+    <span>🌍 Pan-India Supply Chain</span><span class="dot">✦</span>
+    <span>♻️ Sustainable Agriculture</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual reveal">
+    <div class="about-img-frame">
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Stylized plant illustration -->
+        <ellipse cx="100" cy="220" rx="60" ry="12" fill="#2e7d32" opacity="0.3"/>
+        <rect x="94" y="100" width="12" height="120" rx="6" fill="#2e7d32"/>
+        <ellipse cx="100" cy="90" rx="50" ry="65" fill="#43a047"/>
+        <ellipse cx="60" cy="120" rx="35" ry="25" fill="#66bb6a" transform="rotate(-20 60 120)"/>
+        <ellipse cx="140" cy="115" rx="35" ry="25" fill="#66bb6a" transform="rotate(20 140 115)"/>
+        <ellipse cx="100" cy="50" rx="32" ry="42" fill="#76c442"/>
+        <circle cx="100" cy="65" r="12" fill="#a8d500" opacity="0.6"/>
+        <!-- Droplets -->
+        <ellipse cx="55" cy="80" rx="5" ry="7" fill="#29b6f6" opacity="0.5"/>
+        <ellipse cx="150" cy="95" rx="4" ry="6" fill="#29b6f6" opacity="0.5"/>
+        <ellipse cx="80" cy="45" rx="3" ry="5" fill="#29b6f6" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="about-badge-float">
+      <strong>6+</strong>
+      <span>Years of Excellence</span>
+    </div>
+    <div class="about-card-float">
+      <p>🌿 Trusted by</p>
+      <span>Lakhs of Farmers Across India</span>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <div class="section-label reveal">About Dexton Crop Guard</div>
+    <h2 class="section-title reveal reveal-delay-1">Your Partner in <em>Crop Science</em> & Growth</h2>
+    <p class="section-desc reveal reveal-delay-2">
+      Established in 2018 in Surat, Gujarat, Dexton Crop Guard delivers cutting-edge agricultural solutions — from soil health and seed treatment to pest management and post-harvest care — helping India's farmers grow smarter and more sustainably.
+    </p>
+
+    <div class="about-features">
+      <div class="feat-item reveal reveal-delay-1">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-text">
+          <strong>Crop Protection</strong>
+          <span>Advanced insecticides & pest management solutions</span>
+        </div>
+      </div>
+      <div class="feat-item reveal reveal-delay-2">
+        <div class="feat-icon">🍄</div>
+        <div class="feat-text">
+          <strong>Fungicide Range</strong>
+          <span>Protect crops from fungal infections effectively</span>
+        </div>
+      </div>
+      <div class="feat-item reveal reveal-delay-3">
+        <div class="feat-icon">🌱</div>
+        <div class="feat-text">
+          <strong>Growth Regulators</strong>
+          <span>Boost yield with science-backed PGR solutions</span>
+        </div>
+      </div>
+      <div class="feat-item reveal reveal-delay-4">
+        <div class="feat-icon">♻️</div>
+        <div class="feat-text">
+          <strong>Sustainability</strong>
+          <span>Environmentally safe, sustainable formulations</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header">
+    <div class="section-label reveal">Our Product Portfolio</div>
+    <h2 class="section-title reveal reveal-delay-1">Complete <em>Agrochemical</em> Solutions</h2>
+    <p class="section-desc reveal reveal-delay-2">Premium-quality, registered formulations trusted by distributors, dealers, and farmers across India.</p>
+  </div>
+
+  <div class="count-strip reveal">
+    <div class="count-strip-stat"><strong>8</strong><span>Insecticides</span></div>
+    <div class="count-sep"></div>
+    <div class="count-strip-stat"><strong>5</strong><span>Fungicides</span></div>
+    <div class="count-sep"></div>
+    <div class="count-strip-stat"><strong>3</strong><span>Herbicides</span></div>
+    <div class="count-sep"></div>
+    <div class="count-strip-stat"><strong>5</strong><span>Growth Regulators</span></div>
+    <div class="count-sep"></div>
+    <div class="count-strip-stat"><strong>21+</strong><span>Total Products</span></div>
+  </div>
+
+  <div class="product-search-wrap reveal">
+    <input type="text" class="product-search" id="productSearch" placeholder="🔍  Search products by name or formula...">
+  </div>
+
+  <div class="product-tabs reveal">
+    <button class="tab-btn active" data-tab="all">All Products</button>
+    <button class="tab-btn" data-tab="insecticide">Insecticides</button>
+    <button class="tab-btn" data-tab="fungicide">Fungicides</button>
+    <button class="tab-btn" data-tab="herbicide">Herbicides</button>
+    <button class="tab-btn" data-tab="pgr">Plant Growth Regulators</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid">
+
+    <!-- INSECTICIDES -->
+    <div class="product-card visible" data-cat="insecticide" data-name="wandar plus thiamethoxam">
+      <div class="product-card-img">
+        <span class="product-emoji">🌾</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Wandar Plus</h3>
+        <p class="formula">Thiamethoxam 30% FS</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Wandar Plus')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Wandar Plus (Thiamethoxam 30% FS). Kindly connect." target="_blank" title="WhatsApp">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="niyo novaluron indoxacarb">
+      <div class="product-card-img">
+        <span class="product-emoji">🐛</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Niyo</h3>
+        <p class="formula">Novaluron 5.25% + Indoxacarb 4.5% SC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Niyo')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Niyo (Novaluron 5.25% + Indoxacarb 4.5% SC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="kalika thiamethoxam lambdacyhalothrin">
+      <div class="product-card-img">
+        <span class="product-emoji">⚔️</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Kalika</h3>
+        <p class="formula">Thiamethoxam 12.6% + Lambdacyhalothrin 9.5% ZC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Kalika')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Kalika (Thiamethoxam 12.6% + Lambdacyhalothrin 9.5% ZC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="hactor fipronil">
+      <div class="product-card-img">
+        <span class="product-emoji">🛡️</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Hactor</h3>
+        <p class="formula">Fipronil 18.87% SC</p>
+        <div class="sizes"><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span><span class="size-tag">100 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Hactor')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Hactor (Fipronil 18.87% SC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="tyzon dinotefuran">
+      <div class="product-card-img">
+        <span class="product-emoji">⚡</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Tyzon</h3>
+        <p class="formula">Dinotefuran 20% SG</p>
+        <div class="sizes"><span class="size-tag">500 gm</span><span class="size-tag">250 gm</span><span class="size-tag">100 gm</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Tyzon')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Tyzon (Dinotefuran 20% SG). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="dexton-5 emamectin benzoate">
+      <div class="product-card-img">
+        <span class="product-emoji">🔥</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Dexton-5</h3>
+        <p class="formula">Emamectin Benzoate 5% SG</p>
+        <div class="sizes"><span class="size-tag">250 gm</span><span class="size-tag">100 gm</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Dexton-5')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Dexton-5 (Emamectin Benzoate 5% SG). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="wandar-25 thiamethoxam">
+      <div class="product-card-img">
+        <span class="product-emoji">🌿</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Wandar-25</h3>
+        <p class="formula">Thiamethoxam 25% WG</p>
+        <div class="sizes"><span class="size-tag">250 gm</span><span class="size-tag">100 gm</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Wandar-25')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Wandar-25 (Thiamethoxam 25% WG). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="ethiton ethion cypermethrin">
+      <div class="product-card-img">
+        <span class="product-emoji">🐲</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Ethiton</h3>
+        <p class="formula">Ethion 40% + Cypermethrin 5% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Ethiton')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Ethiton (Ethion 40% + Cypermethrin 5% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="crista 505 chlorpyriphos cypermethrin">
+      <div class="product-card-img">
+        <span class="product-emoji">🌀</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Crista 505</h3>
+        <p class="formula">Chlorpyriphos 50% + Cypermethrin 5% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Crista 505')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Crista 505 (Chlorpyriphos 50% + Cypermethrin 5% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="tiffer tolfenpyrad">
+      <div class="product-card-img">
+        <span class="product-emoji">🌳</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Tiffer</h3>
+        <p class="formula">Tolfenpyrad 15% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Tiffer')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Tiffer (Tolfenpyrad 15% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="prodix super profenofos cypermethrin">
+      <div class="product-card-img">
+        <span class="product-emoji">💥</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Prodix Super</h3>
+        <p class="formula">Profenofos 40% + Cypermethrin 4% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Prodix Super')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Prodix Super (Profenofos 40% + Cypermethrin 4% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="fossil fipronil">
+      <div class="product-card-img">
+        <span class="product-emoji">🦕</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Fossil</h3>
+        <p class="formula">Fipronil 2.92% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Fossil')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Fossil (Fipronil 2.92% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="easton 1.9 emamectin benzoate">
+      <div class="product-card-img">
+        <span class="product-emoji">🤖</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Easton 1.9</h3>
+        <p class="formula">Emamectin Benzoate 1.9% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Easton 1.9')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Easton 1.9 (Emamectin Benzoate 1.9% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="insecticide" data-name="mivant chlorantraniliprole">
+      <div class="product-card-img">
+        <span class="product-emoji">🌺</span>
+        <div class="product-card-tag">Insecticide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Mivant</h3>
+        <p class="formula">Chlorantraniliorole 18.5% SC</p>
+        <div class="sizes"><span class="size-tag">150 ml</span><span class="size-tag">60 ml</span><span class="size-tag">30 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Mivant')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Mivant (Chlorantraniliorole 18.5% SC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FUNGICIDES -->
+    <div class="product-card visible" data-cat="fungicide" data-name="premium propiconazole difenoconazole">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #f3e5f5, rgba(156,39,176,0.1));">
+        <span class="product-emoji">🔮</span>
+        <div class="product-card-tag" style="background:#7b1fa2;">Fungicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Premium</h3>
+        <p class="formula">Propiconazole 13.9% + Difenoconazole 13.9% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Premium')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Premium (Propiconazole + Difenoconazole EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="fungicide" data-name="lionix azoxystrobin difenoconazole">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #fff8e1, rgba(255,193,7,0.1));">
+        <span class="product-emoji">🦁</span>
+        <div class="product-card-tag" style="background:#e65100;">Fungicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Lionix</h3>
+        <p class="formula">Azoxystrobin 18.2% + Difenoconazole 11.4% SC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Lionix')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Lionix (Azoxystrobin + Difenoconazole SC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="fungicide" data-name="delfin azoxystrobin tebuconazole">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e8eaf6, rgba(63,81,181,0.1));">
+        <span class="product-emoji">💎</span>
+        <div class="product-card-tag" style="background:#283593;">Fungicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Delfin</h3>
+        <p class="formula">Azoxystrobin 11% + Tebuconazole 18.3% SC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Delfin')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Delfin (Azoxystrobin + Tebuconazole SC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="fungicide" data-name="sunrise tebuconazole sulphur">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #fffde7, rgba(255,235,59,0.15));">
+        <span class="product-emoji">🌅</span>
+        <div class="product-card-tag" style="background:#f9a825;">Fungicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Sunrise</h3>
+        <p class="formula">Tebuconazole 10% + Sulphur 65% WG</p>
+        <div class="sizes"><span class="size-tag">1 Kg</span><span class="size-tag">500 gm</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Sunrise')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Sunrise (Tebuconazole + Sulphur WG). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="fungicide" data-name="yorkut neem azadirachtin">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e8f5e9, rgba(46,125,50,0.12));">
+        <span class="product-emoji">🌿</span>
+        <div class="product-card-tag" style="background:#1b5e20;">Fungicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Yorkut</h3>
+        <p class="formula">Neem Kernel Based EC – Azadirachtin 0.03% w/w</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Yorkut')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Yorkut (Neem Kernel EC – Azadirachtin). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERBICIDES -->
+    <div class="product-card visible" data-cat="herbicide" data-name="peraton paraquat dichloride">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e3f2fd, rgba(33,150,243,0.1));">
+        <span class="product-emoji">🐆</span>
+        <div class="product-card-tag" style="background:#0d47a1;">Herbicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Peraton</h3>
+        <p class="formula">Paraquat Dichloride 24% SL</p>
+        <div class="sizes"><span class="size-tag">5 Ltr</span><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Peraton')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Peraton (Paraquat Dichloride 24% SL). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="herbicide" data-name="hil-jack glyphosate">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e8f5e9, rgba(76,175,80,0.12));">
+        <span class="product-emoji">🌱</span>
+        <div class="product-card-tag" style="background:#388e3c;">Herbicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Hil-Jack</h3>
+        <p class="formula">Glyphosate 41% SL</p>
+        <div class="sizes"><span class="size-tag">5 Ltr</span><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Hil-Jack')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Hil-Jack (Glyphosate 41% SL). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="herbicide" data-name="super guard quizalofop ethyl">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #f1f8e9, rgba(139,195,74,0.15));">
+        <span class="product-emoji">🛡️</span>
+        <div class="product-card-tag" style="background:#558b2f;">Herbicide</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Super Guard</h3>
+        <p class="formula">Quizalofop Ethyl 10% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Super Guard')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Super Guard (Quizalofop Ethyl 10% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANT GROWTH REGULATORS -->
+    <div class="product-card visible" data-cat="pgr" data-name="proji gibberellic acid">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e0f7fa, rgba(0,188,212,0.1));">
+        <span class="product-emoji">🌱</span>
+        <div class="product-card-tag" style="background:#006064;">PGR</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Proji</h3>
+        <p class="formula">Gibberellic Acid 0.001% L</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Proji')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Proji (Gibberellic Acid). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="pgr" data-name="faster tracontolar">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #fce4ec, rgba(233,30,99,0.08));">
+        <span class="product-emoji">🌸</span>
+        <div class="product-card-tag" style="background:#880e4f;">PGR</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Faster</h3>
+        <p class="formula">Tracontolar 0.05% EC</p>
+        <div class="sizes"><span class="size-tag">1 Ltr</span><span class="size-tag">500 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Faster')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Faster (Tracontolar 0.05% EC). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="pgr" data-name="kalki gold-98 humic acid">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #fff8e1, rgba(255,160,0,0.1));">
+        <span class="product-emoji">🏅</span>
+        <div class="product-card-tag" style="background:#e65100;">PGR</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Kalki Gold-98</h3>
+        <p class="formula">Humic Acid 98</p>
+        <div class="sizes"><span class="size-tag">1 Kg</span><span class="size-tag">500 gm</span><span class="size-tag">250 gm</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Kalki Gold-98')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Kalki Gold-98 (Humic Acid 98). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="pgr" data-name="super stik silicon sticker">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #f3e5f5, rgba(103,58,183,0.1));">
+        <span class="product-emoji">🧪</span>
+        <div class="product-card-tag" style="background:#4527a0;">PGR</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Super Stik</h3>
+        <p class="formula">Silicon Based Super Sticker</p>
+        <div class="sizes"><span class="size-tag">200 ml</span><span class="size-tag">100 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Super Stik')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Super Stik (Silicon Based Super Sticker). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card visible" data-cat="pgr" data-name="dexton plus sodium para-nitro phenolate">
+      <div class="product-card-img" style="background: linear-gradient(145deg, #e8f5e9, rgba(46,125,50,0.12));">
+        <span class="product-emoji">⭐</span>
+        <div class="product-card-tag">PGR</div>
+      </div>
+      <div class="product-card-body">
+        <h3>Dexton Plus</h3>
+        <p class="formula">Sodium Para-Nitro Phenolate 0.3% SL</p>
+        <div class="sizes"><span class="size-tag">500 ml</span><span class="size-tag">250 ml</span><span class="size-tag">100 ml</span></div>
+        <div class="product-card-actions">
+          <button class="btn-inquiry" onclick="openInquiry('Dexton Plus')">Inquire Now</button>
+          <a class="btn-wa" href="https://wa.me/+919428375031?text=Hi! I am interested in Dexton Plus (Sodium Para-Nitro Phenolate 0.3% SL). Kindly connect." target="_blank">💬</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /products-grid -->
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-bg"></div>
+  <div class="why-inner why-grid">
+    <div class="why-content">
+      <div class="section-label reveal" style="color: var(--green-bright);">Why Choose Us</div>
+      <h2 class="section-title reveal reveal-delay-1">Science-Driven <em style="color:var(--green-bright)">Agriculture</em> for Better Yields</h2>
+      <p class="section-desc reveal reveal-delay-2">We combine deep agrochemical expertise with technology-backed solutions to help farmers maximize productivity while protecting the environment.</p>
+
+      <div class="why-cards reveal reveal-delay-3">
+        <div class="why-card">
+          <div class="why-card-icon">🔬</div>
+          <h4>Research-Backed</h4>
+          <p>Products developed through rigorous scientific research and field trials</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🌍</div>
+          <h4>Pan-India Reach</h4>
+          <p>Distributed through an extensive network of dealers across India</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">✅</div>
+          <h4>Certified Quality</h4>
+          <p>All products meet India's pesticide registration standards</p>
+        </div>
+        <div class="why-card">
+          <div class="why-card-icon">🤝</div>
+          <h4>Farmer-First</h4>
+          <p>Dedicated to maximising returns for India's farming community</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mv-panels reveal reveal-delay-2">
+      <div class="mv-panel">
+        <h3>Our Vision</h3>
+        <p>To provide ever-growing satisfaction to farmers, dealers, and distributors by becoming the most trusted name in Indian agrochemicals — putting the right solution in every farmer's hands.</p>
+      </div>
+      <div class="mv-panel">
+        <h3>Our Mission</h3>
+        <p>To provide farmers with comprehensive services through detailed soil and crop analysis, custom solutions, and precision application — embracing science, innovation, and technology to improve sustainability and profitability of their land.</p>
+      </div>
+      <div class="mv-panel">
+        <h3>Market Commitment</h3>
+        <p>Addressing India's growing demand for healthy, fresh, and organic food by empowering farmers with the tools and knowledge they need to produce higher-quality, safer crops for the nation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label reveal">Get In Touch</div>
+      <h2 class="section-title reveal reveal-delay-1">Let's Grow <em>Together</em></h2>
+      <p class="section-desc reveal reveal-delay-2" style="margin-bottom: 36px;">Reach out to our team for product inquiries, dealer partnerships, or any agricultural guidance you need.</p>
+
+      <div class="contact-item reveal reveal-delay-1">
+        <div class="contact-item-icon">👤</div>
+        <div class="contact-item-text">
+          <strong>Managing Director</strong>
+          <p>Mehul Ambaliya</p>
+        </div>
+      </div>
+
+      <div class="contact-item reveal reveal-delay-2">
+        <div class="contact-item-icon">📞</div>
+        <div class="contact-item-text">
+          <strong>Phone</strong>
+          <a href="tel:+919428375031">+91 94283 75031</a>
+        </div>
+      </div>
+
+      <div class="contact-item reveal reveal-delay-3">
+        <div class="contact-item-icon">📧</div>
+        <div class="contact-item-text">
+          <strong>Email</strong>
+          <a href="mailto:dextoncropgard@gmail.com">dextoncropgard@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item reveal reveal-delay-4">
+        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-text">
+          <strong>Office Address</strong>
+          <p>107, Silver Shopping Center, Plot No. 209/10,<br>Silver Textile Hub, Pipodara,<br>Ta. Mangrol, Dist. Surat – 394109, Gujarat</p>
+        </div>
+      </div>
+
+      <div class="social-row reveal">
+        <a href="https://www.facebook.com/dextoncropgard" class="social-btn fb" target="_blank">📘 Facebook</a>
+        <a href="https://www.instagram.com/dextoncropguard" class="social-btn ig" target="_blank">📷 Instagram</a>
+        <a href="https://wa.me/+919428375031" class="social-btn wa" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="contact-form reveal reveal-delay-2">
+      <div class="form-title">Send an Inquiry</div>
+      <p class="form-desc">Fill in the form and our team will get back to you within 24 hours.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" placeholder="Your full name" id="fname">
+        </div>
+        <div class="form-group">
+          <label>Phone *</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX" id="fphone">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" id="femail">
+      </div>
+      <div class="form-group">
+        <label>Product / Subject</label>
+        <select id="fsubject">
+          <option value="">Select a product category...</option>
+          <option>Insecticides</option>
+          <option>Fungicides</option>
+          <option>Herbicides</option>
+          <option>Plant Growth Regulators</option>
+          <option>Dealer / Distribution Inquiry</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your requirement..." id="fmessage"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">🌿 Submit Inquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <div class="footer-logo-icon">DCG</div>
+        <div class="footer-logo-text">
+          <strong>DEXTON CROP GUARD</strong>
+          <span>Protecting Crops Since 2018</span>
+        </div>
+      </div>
+      <p class="footer-tagline">India's trusted agrochemical partner — delivering science-backed solutions for soil health, crop protection, and sustainable farming across the nation.</p>
+      <div class="social-row" style="margin-top: 0;">
+        <a href="https://www.facebook.com/dextoncropgard" class="social-btn fb" target="_blank" style="padding: 8px 14px; font-size: 12px;">📘</a>
+        <a href="https://www.instagram.com/dextoncropguard" class="social-btn ig" target="_blank" style="padding: 8px 14px; font-size: 12px;">📷</a>
+        <a href="https://wa.me/+919428375031" class="social-btn wa" target="_blank" style="padding: 8px 14px; font-size: 12px;">💬</a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer-heading">Quick Links</p>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#why">Why Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-heading">Product Range</p>
+      <ul class="footer-products-list">
+        <li><a href="#products" onclick="filterTab('insecticide')">Insecticides</a></li>
+        <li><a href="#products" onclick="filterTab('fungicide')">Fungicides</a></li>
+        <li><a href="#products" onclick="filterTab('herbicide')">Herbicides</a></li>
+        <li><a href="#products" onclick="filterTab('pgr')">Plant Growth Regulators</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <p class="footer-heading">Contact Us</p>
+      <p>📍 107, Silver Shopping Center,<br>Pipodara, Ta. Mangrol,<br>Dist. Surat – 394109</p>
+      <p style="margin-top: 12px;">📞 <a href="tel:+919428375031" style="color: var(--green-light); text-decoration: none;">+91 94283 75031</a></p>
+      <p>📧 <a href="mailto:dextoncropgard@gmail.com" style="color: var(--green-light); text-decoration: none; font-size: 12px;">dextoncropgard@gmail.com</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Dexton Crop Guard. All rights reserved.</p>
+    <p>Designed with 🌿 for India's Farmers</p>
+  </div>
+</footer>
+
+<!-- INQUIRY MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeInquiry()">✕</button>
+    <div class="modal-title" id="modalProductName">Product Inquiry</div>
+    <p class="modal-subtitle">Send us your inquiry via WhatsApp or fill the contact form</p>
+    <div style="display:flex; flex-direction:column; gap: 12px; margin-top: 20px;">
+      <a id="modalWaBtn" href="#" class="btn-primary" target="_blank" style="justify-content: center; text-decoration: none;">
+        💬 WhatsApp Inquiry
+      </a>
+      <button onclick="closeInquiry(); document.querySelector('#contact').scrollIntoView({behavior:'smooth'});" class="btn-ghost" style="border: 1.5px solid var(--border); color: var(--dark); justify-content: center; background: var(--off-white);">
+        📋 Fill Contact Form
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Product tabs
+  let currentTab = 'all';
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTab = btn.dataset.tab;
+      filterTab(currentTab);
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  function filterTab(tab) {
+    currentTab = tab;
+    const search = document.getElementById('productSearch').value.toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+      const matchTab = tab === 'all' || card.dataset.cat === tab;
+      const matchSearch = !search || card.dataset.name.includes(search) ||
+        card.querySelector('h3').textContent.toLowerCase().includes(search) ||
+        card.querySelector('.formula').textContent.toLowerCase().includes(search);
+      card.classList.toggle('visible', matchTab && matchSearch);
+    });
+    // update active tab button
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === tab);
+    });
+  }
+
+  // Product search
+  document.getElementById('productSearch').addEventListener('input', () => {
+    filterTab(currentTab);
+  });
+
+  // Inquiry modal
+  function openInquiry(productName) {
+    document.getElementById('modalProductName').textContent = productName + ' – Inquiry';
+    document.getElementById('modalWaBtn').href =
+      `https://wa.me/+919428375031?text=Hi! I am interested in ${encodeURIComponent(productName)}. Kindly connect.`;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeInquiry() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeInquiry();
+  }
+
+  // Form submit
+  function submitForm() {
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const subject = document.getElementById('fsubject').value;
+    const message = document.getElementById('fmessage').value.trim();
+    if (!name || !phone) { alert('Please fill in your name and phone number.'); return; }
+    const wa = `https://wa.me/+919428375031?text=${encodeURIComponent(
+      `Inquiry from: ${name}\nPhone: ${phone}\nSubject: ${subject}\nMessage: ${message}`
+    )}`;
+    window.open(wa, '_blank');
+  }
+</script>
+</body>
+</html>
